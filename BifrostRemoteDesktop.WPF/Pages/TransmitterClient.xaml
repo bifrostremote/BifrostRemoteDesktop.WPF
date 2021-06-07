@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="BifrostRemoteDesktop.Pages.TransmitterClientPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BifrostRemoteDesktop"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid >
+        <StackPanel>
+            <Canvas x:Name="MainCanvas" Width="640" Height="480" 
+                    MouseMove="MainCanvas_MouseMove" 
+                    MouseDown="MainCanvas_MouseDown"
+                    MouseUp="MainCanvas_MouseUp">
+                <Rectangle Fill="LightGray" Width="640" Height="480"/>
+            </Canvas>
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="M.L: "/>
+                <TextBlock Text="{Binding MouseLeftButtonPressed }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="M.R: "/>
+                <TextBlock Text="{Binding MouseRightButtonPressed }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="M.M: "/>
+                <TextBlock Text ="{Binding MouseMiddleButtonPressed }"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="M.X: "/>
+                <TextBlock Text="{Binding MouseX}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="M.Y: "/>
+                <TextBlock Text="{Binding MouseY}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Select Endpoint"/>
+                <ComboBox ItemsSource="{Binding AvailableEndpoints}" SelectedItem="{Binding SelectedEndpoint, Mode=TwoWay}"/>
+                <StackPanel Orientation="Horizontal">
+                <Button Content="Connect" Click="Connect_Click"/>
+                    <TextBlock Text="Connection Status:"/>
+                    <TextBlock Text="{Binding ConnectionStatus, Mode=OneWay}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+</Page>
