@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace BifrostRemoteDesktop.Common.SystemControllers
 {
-    public class WindowsMouseController : IPointerController
+    public class WindowsMouseController
     {
         public bool CanSetCursorPosition => true;
 
@@ -18,9 +18,6 @@ namespace BifrostRemoteDesktop.Common.SystemControllers
         [DllImport("user32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool SetCursorPos(int x, int y);
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern uint GetLastError();
 
         public LPPoint GetCursorPosition()
         {
@@ -43,8 +40,17 @@ namespace BifrostRemoteDesktop.Common.SystemControllers
 
         public void SetCursorPosition(double x, double y)
         {
-            SetCursorPos(Convert.ToInt32(x), Convert.ToInt32(y));
+            var a = SetCursorPos(Convert.ToInt32(x), Convert.ToInt32(y));
         }
 
+        public void SetCursorPositionPercentage(double percentageX, double percentageY)
+        {
+            double x = (SystemParameters.PrimaryScreenWidth / 96 * 120) * percentageX;
+            double y = (SystemParameters.PrimaryScreenHeight / 96 * 120) * percentageY;
+
+            SetCursorPosition(x, y);
+
+
+        }
     }
 }

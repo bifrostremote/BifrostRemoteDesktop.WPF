@@ -4,22 +4,29 @@ namespace BifrostRemoteDesktop.Common.SystemControllers
 {
     public class WindowsSystemController : ISystemController
     {
-        private WindowsMouseController _pointer;
+        private WindowsMouseController _mouseController;
+        private WindowsKeyboardController _keyboardController;
 
         public WindowsSystemController()
         {
-            _pointer = new WindowsMouseController();
+            _mouseController = new WindowsMouseController();
+            _keyboardController = new WindowsKeyboardController();
         }
 
-        public bool SetPointerPosition(double x, double y)
+        public bool SetMousePosition(double x, double y)
         {
-            _pointer.SetCursorPosition(x, y);
+            _mouseController.SetCursorPosition(x, y);
             return true;
         }
 
-        public void SetPointerState()
+        public void SetMouseState()
         {
             throw new NotImplementedException();
+        }
+
+        public void PressKey(char key)
+        {
+            _keyboardController.PressKey(key);
         }
 
     }

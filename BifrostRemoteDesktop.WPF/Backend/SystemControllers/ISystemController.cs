@@ -2,7 +2,7 @@
 {
     public interface ISystemController
     {
-        bool SetMousePosition(double x, double y);
-        void SetMouseState();
+         public WindowsMouseController Mouse { get; }
+         public WindowsKeyboardController Keyboard { get; }
     }
 }

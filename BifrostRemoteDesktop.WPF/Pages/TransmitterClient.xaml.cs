@@ -2,6 +2,7 @@
 using BifrostRemoteDesktop.Common.Models.Commands;
 using BifrostRemoteDesktop.Common.Network;
 using BifrostRemoteDesktop.Common.SystemControllers;
+using BifrostRemoteDesktop.WPF.Backend.Models.Commands;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -9,8 +10,6 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace BifrostRemoteDesktop.Pages
 {
@@ -119,8 +118,7 @@ namespace BifrostRemoteDesktop.Pages
             if (_commandReceiver == null)
             {
                 _commandReceiver = new CommandReceiver(new WindowsSystemController());
-                _commandReceiver
-                    .Start();
+                _commandReceiver.Start();
             }
 
         }
@@ -197,7 +195,15 @@ namespace BifrostRemoteDesktop.Pages
             Point pos = e.GetPosition((IInputElement)sender);
             MouseX = pos.X;
             MouseY = pos.Y;
-            SendMovePointerCommand(new MovePointerCommandArgs() { TargetX = MouseX, TargetY = MouseY });
+
+            _commandTransmitter.SendCommand(CommandType.MovePointerPercentage,
+                new MovePointerPercentageCommandArgs()
+                {
+                    PercentageX = MouseX / MainCanvas.Width,
+                    PercentageY = MouseY / MainCanvas.Height
+                });
+
+            //SendMovePointerCommand(new MovePointerCommandArgs() { TargetX = MouseX, TargetY = MouseY });
         }
 
         private void MainCanvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -214,6 +220,11 @@ namespace BifrostRemoteDesktop.Pages
             var pos = e.GetPosition((IInputElement)sender);
             //UpdateViewPointerDetails(point);
             //SendUpdatePointerStateCommand(point);
+        }
+
+        private void MainCanvas_KeyDown(object sender, KeyEventArgs e)
+        {
+
         }
     }
 

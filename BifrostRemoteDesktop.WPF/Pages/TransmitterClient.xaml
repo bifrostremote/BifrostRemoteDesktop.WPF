@@ -12,7 +12,8 @@
             <Canvas x:Name="MainCanvas" Width="640" Height="480" 
                     MouseMove="MainCanvas_MouseMove" 
                     MouseDown="MainCanvas_MouseDown"
-                    MouseUp="MainCanvas_MouseUp">
+                    MouseUp="MainCanvas_MouseUp"
+                    Keyboard.KeyDown="MainCanvas_KeyDown">
                 <Rectangle Fill="LightGray" Width="640" Height="480"/>
             </Canvas>
             <StackPanel Orientation="Horizontal" >

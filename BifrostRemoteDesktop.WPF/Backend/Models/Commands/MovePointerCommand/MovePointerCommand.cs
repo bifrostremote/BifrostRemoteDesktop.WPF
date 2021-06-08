@@ -9,7 +9,7 @@ namespace BifrostRemoteDesktop.Common.Models.Commands
 
         public override void Execute()
         {
-            SystemController.SetMousePosition(
+            SystemController.Mouse.SetCursorPosition(
                 x: Args.TargetX,
                 y: Args.TargetY);
         }
